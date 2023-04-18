@@ -19,6 +19,7 @@ class WorkCommand extends \Illuminate\Queue\Console\WorkCommand
             throw new EmptyServiceNameException();
         }
 
+        $this->worker = $this->laravel->make(WindowsWorker::class);
         $this->worker->setWindowsServiceName($serviceName);
         $this->setWindowsCtrlEventHandler();
 
