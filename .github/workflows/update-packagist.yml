@@ -12,4 +12,4 @@ jobs:
       - name: Check out repo's default branch
         uses: actions/checkout@v3
       - name: Update Packagist
-        run: curl -XPOST -H'content-type:application/json' 'https://packagist.org/api/update-package?username=Litiano&apiToken=${{ secrets.PACKAGIST_API_TOKEN }}' -d'{"repository":{"url":"https://packagist.org/packages/litiano/windows-service-for-laravel-queue"}}'
+        run: curl -XPOST -H'content-type:application/json' 'https://packagist.org/api/update-package?username=Litiano&apiToken=${{ secrets.PACKAGIST_API_TOKEN }}' -d'{"repository":{"url":"https://packagist.org/packages/litiano/laravel-queue-for-windows"}}'

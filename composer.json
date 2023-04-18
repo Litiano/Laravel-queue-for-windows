@@ -1,6 +1,6 @@
 {
-    "name": "litiano/windows-service-for-laravel-queue",
-    "description": "Windows Service For Laravel Queue",
+    "name": "litiano/laravel-queue-for-windows",
+    "description": "Laravel Queue for Windows",
     "type": "library",
     "license": "MIT",
     "autoload": {
