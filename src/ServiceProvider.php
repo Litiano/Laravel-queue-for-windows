@@ -1,10 +1,10 @@
 <?php
 
-namespace Litiano\WindowsServiceForLaravelQueue;
+namespace Litiano\LaravelQueueForWindows;
 
-use Litiano\WindowsServiceForLaravelQueue\Queue\Console\CreateConfigCommand;
-use Litiano\WindowsServiceForLaravelQueue\Queue\Console\RestartCommand;
-use Litiano\WindowsServiceForLaravelQueue\Queue\Console\WorkCommand;
+use Litiano\LaravelQueueForWindows\Queue\Console\CreateConfigCommand;
+use Litiano\LaravelQueueForWindows\Queue\Console\RestartCommand;
+use Litiano\LaravelQueueForWindows\Queue\Console\WorkCommand;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {

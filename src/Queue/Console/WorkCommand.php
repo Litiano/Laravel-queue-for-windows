@@ -1,9 +1,9 @@
 <?php
 
-namespace Litiano\WindowsServiceForLaravelQueue\Queue\Console;
+namespace Litiano\LaravelQueueForWindows\Queue\Console;
 
-use Litiano\WindowsServiceForLaravelQueue\Exception\EmptyServiceNameException;
-use Litiano\WindowsServiceForLaravelQueue\Queue\WindowsWorker;
+use Litiano\LaravelQueueForWindows\Exception\EmptyServiceNameException;
+use Litiano\LaravelQueueForWindows\Queue\WindowsWorker;
 
 /**
  * @property WindowsWorker $worker

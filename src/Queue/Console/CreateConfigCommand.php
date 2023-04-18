@@ -1,6 +1,6 @@
 <?php
 
-namespace Litiano\WindowsServiceForLaravelQueue\Queue\Console;
+namespace Litiano\LaravelQueueForWindows\Queue\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;

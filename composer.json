@@ -5,7 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Litiano\\WindowsServiceForLaravelQueue\\": "src/"
+            "Litiano\\LaravelQueueForWindows\\": "src/"
         }
     },
     "authors": [

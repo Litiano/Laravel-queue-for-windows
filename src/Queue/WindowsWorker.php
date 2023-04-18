@@ -1,6 +1,6 @@
 <?php
 
-namespace Litiano\WindowsServiceForLaravelQueue\Queue;
+namespace Litiano\LaravelQueueForWindows\Queue;
 
 use Illuminate\Queue\Worker;
 

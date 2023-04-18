@@ -1,6 +1,6 @@
 <?php
 
-namespace Litiano\WindowsServiceForLaravelQueue\Exception;
+namespace Litiano\LaravelQueueForWindows\Exception;
 
 use RuntimeException;
 use Throwable;

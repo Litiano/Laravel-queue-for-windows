@@ -1,8 +1,8 @@
 <?php
 
-namespace Litiano\WindowsServiceForLaravelQueue\Queue\Console;
+namespace Litiano\LaravelQueueForWindows\Queue\Console;
 
-use Litiano\WindowsServiceForLaravelQueue\Exception\EmptyServiceNameException;
+use Litiano\LaravelQueueForWindows\Exception\EmptyServiceNameException;
 
 class RestartCommand extends \Illuminate\Queue\Console\RestartCommand
 {
