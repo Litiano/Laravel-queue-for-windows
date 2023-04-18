@@ -2,7 +2,6 @@
 
 namespace Litiano\WindowsServiceForLaravelQueue\Queue\Console;
 
-use Illuminate\Contracts\Cache\Repository as CacheRepositoryContract;
 use Litiano\WindowsServiceForLaravelQueue\Exception\EmptyServiceNameException;
 
 class RestartCommand extends \Illuminate\Queue\Console\RestartCommand
@@ -21,10 +20,7 @@ class RestartCommand extends \Illuminate\Queue\Console\RestartCommand
         $this->info('Windows Service Queue restart signal.');
     }
 
-    /**
-     * @return CacheRepositoryContract
-     */
-    protected function _getLaravelCache(): CacheRepositoryContract
+    protected function _getLaravelCache()
     {
         if (!empty($this->cache)) {
             return $this->cache;
