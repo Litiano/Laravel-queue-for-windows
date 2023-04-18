@@ -1,0 +1,29 @@
+{
+    "name": "litiano/windows-service-for-laravel-queue",
+    "description": "Windows Service For Laravel Queue",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Litiano\\WindowsServiceForLaravelQueue\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Litiano Moura"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "illuminate/queue": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0",
+        "illuminate/console": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0",
+        "php": "^7.4|^8.0|^8.1|^8.2"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Litiano\\WindowsServiceForLaravelQueue\\ServiceProvider"
+            ]
+        }
+    }
+}
