@@ -10,7 +10,7 @@ class CreateConfigCommand extends Command
     protected $signature = "windows:service:queue:create
                             {windowsServiceName : Windows Service Name}
                             {--queueConnection=database : The name of the queue connection to work}
-                            {--queues= : The names of the queues to work}
+                            {--queue= : The names of the queues to work}
                             {--displayName=Laravel Queue Work : Windows Service Display Name}
                             {--description=Laravel Queue Work Service : Windows Service Description}
                             {--startType=Automatic : Windows Service Start Type [Automatic,Manual,Disabled]}
@@ -20,7 +20,7 @@ class CreateConfigCommand extends Command
     {
         $windowsServiceName = $this->argument('windowsServiceName');
         $queueConnection = $this->option('queueConnection');
-        $queues = $this->option('queues');
+        $queue = $this->option('queue');
         $displayName = $this->option('displayName');
         $description = $this->option('description');
         $startType = $this->option('startType');
@@ -31,7 +31,7 @@ class CreateConfigCommand extends Command
             '{{service_display_name}}' => "{$displayName} [{$windowsServiceName}]",
             '{{service_description}}' => $description,
             '{{service_start_type}}' => $startType,
-            '{{queue_work_arguments}}' => $queueWorkArguments . ($queues ? " --queues={$queues}" : ''),
+            '{{queue_work_arguments}}' => $queueWorkArguments . ($queue ? " --queue={$queue}" : ''),
             '{{php_path}}' => PHP_BINARY,
             '{{laravel_base_path}}' => $this->laravel->basePath(),
         ];
