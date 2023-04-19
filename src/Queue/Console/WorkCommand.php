@@ -2,6 +2,7 @@
 
 namespace Litiano\LaravelQueueForWindows\Queue\Console;
 
+use Illuminate\Contracts\Cache\Repository as Cache;
 use Litiano\LaravelQueueForWindows\Exception\EmptyServiceNameException;
 use Litiano\LaravelQueueForWindows\Queue\WindowsWorker;
 
@@ -12,6 +13,11 @@ class WorkCommand extends \Illuminate\Queue\Console\WorkCommand
 {
     use HasServiceNameOptionTrait;
 
+    public function __construct(WindowsWorker $worker, Cache $cache = null)
+    {
+        parent::__construct($worker, $cache);
+    }
+
     public function handle()
     {
         $serviceName = $this->getWindowsServiceNameOptionValue();
@@ -19,7 +25,6 @@ class WorkCommand extends \Illuminate\Queue\Console\WorkCommand
             throw new EmptyServiceNameException();
         }
 
-        $this->worker = $this->laravel->make(WindowsWorker::class);
         $this->worker->setWindowsServiceName($serviceName);
         $this->setWindowsCtrlEventHandler();
 

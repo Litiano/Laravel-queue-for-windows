@@ -31,7 +31,7 @@ class ServiceProvider extends QueueServiceProvider
      */
     protected function registerWorker()
     {
-        $this->app->singleton('queue.worker', function ($app) {
+        $this->app->singleton(WindowsWorker::class, function ($app) {
             $isDownForMaintenance = function () {
                 return $this->app->isDownForMaintenance();
             };
