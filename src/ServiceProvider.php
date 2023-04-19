@@ -3,7 +3,6 @@
 namespace Litiano\LaravelQueueForWindows;
 
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Queue\QueueServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Litiano\LaravelQueueForWindows\Exception\InvalidParamsForWindowsWorker;
 use Litiano\LaravelQueueForWindows\Queue\Console\CreateConfigCommand;
@@ -11,7 +10,7 @@ use Litiano\LaravelQueueForWindows\Queue\Console\RestartCommand;
 use Litiano\LaravelQueueForWindows\Queue\Console\WorkCommand;
 use Litiano\LaravelQueueForWindows\Queue\WindowsWorker;
 
-class ServiceProvider extends QueueServiceProvider
+class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function boot(): void
     {
@@ -22,6 +21,11 @@ class ServiceProvider extends QueueServiceProvider
                 CreateConfigCommand::class,
             ]);
         }
+    }
+
+    public function register()
+    {
+        $this->registerWorker();
     }
 
     /**
