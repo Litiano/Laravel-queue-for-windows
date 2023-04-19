@@ -35,11 +35,7 @@ class WorkCommand extends \Illuminate\Queue\Console\WorkCommand
         sapi_windows_set_ctrl_handler(function (int $event) {
             if ($event === PHP_WINDOWS_EVENT_CTRL_C) {
                 $this->info('Windows Ctrl+C event handler');
-
-                $this->call(
-                    'windows:service:queue:restart',
-                    [$this->windowsServiceNameOption => $this->getWindowsServiceNameOptionValue()]
-                );
+                $this->worker->shouldQuit = true;
             }
         });
     }
