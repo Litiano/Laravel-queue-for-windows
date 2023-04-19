@@ -47,8 +47,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
                 if (method_exists($app['db'], 'getConnections')) {
                     foreach ($app['db']->getConnections() as $connection) {
-                        $connection->resetTotalQueryDuration();
-                        $connection->allowQueryDurationHandlersToRunAgain();
+                        if (method_exists($connection, 'resetTotalQueryDuration')) {
+                            $connection->resetTotalQueryDuration();
+                        }
+                        if (method_exists($connection, 'allowQueryDurationHandlersToRunAgain')) {
+                            $connection->allowQueryDurationHandlersToRunAgain();
+                        }
                     }
                 }
 
