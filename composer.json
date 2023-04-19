@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Litiano\\WindowsServiceForLaravelQueue\\ServiceProvider"
+                "Litiano\\LaravelQueueForWindows\\ServiceProvider"
             ]
         }
     }
