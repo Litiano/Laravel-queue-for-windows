@@ -9,6 +9,7 @@ use Litiano\LaravelQueueForWindows\Queue\Console\CreateConfigCommand;
 use Litiano\LaravelQueueForWindows\Queue\Console\RestartCommand;
 use Litiano\LaravelQueueForWindows\Queue\Console\WorkCommand;
 use Litiano\LaravelQueueForWindows\Queue\WindowsWorker;
+use ReflectionClass;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -40,55 +41,65 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
                 return $this->app->isDownForMaintenance();
             };
 
-            $resetScope = function () use ($app) {
-                if (method_exists($app['log']->driver(), 'withoutContext')) {
-                    $app['log']->withoutContext();
-                }
+            $resetScope = $this->getResetScopeFunction($app);
 
-                if (method_exists($app['db'], 'getConnections')) {
-                    foreach ($app['db']->getConnections() as $connection) {
-                        if (method_exists($connection, 'resetTotalQueryDuration')) {
-                            $connection->resetTotalQueryDuration();
-                        }
-                        if (method_exists($connection, 'allowQueryDurationHandlersToRunAgain')) {
-                            $connection->allowQueryDurationHandlersToRunAgain();
-                        }
+            return $this->newWindowsWorkerInstance($app, $isDownForMaintenance, $resetScope);
+        });
+    }
+
+    private function getResetScopeFunction($app): callable
+    {
+        return function () use ($app) {
+            if (method_exists($app['log']->driver(), 'withoutContext')) {
+                $app['log']->withoutContext();
+            }
+
+            if (method_exists($app['db'], 'getConnections')) {
+                foreach ($app['db']->getConnections() as $connection) {
+                    if (method_exists($connection, 'resetTotalQueryDuration')) {
+                        $connection->resetTotalQueryDuration();
+                    }
+                    if (method_exists($connection, 'allowQueryDurationHandlersToRunAgain')) {
+                        $connection->allowQueryDurationHandlersToRunAgain();
                     }
                 }
-
-                $app->forgetScopedInstances();
-
-                return Facade::clearResolvedInstances();
-            };
-
-            $reflectionClass = new \ReflectionClass(WindowsWorker::class);
-            $paramsCount = count($reflectionClass->getConstructor()->getParameters());
-
-            switch ($paramsCount) {
-                case 3:
-                    return new WindowsWorker(
-                        $app['queue'],
-                        $app['events'],
-                        $app[ExceptionHandler::class]
-                    );
-                case 4:
-                    return new WindowsWorker(
-                        $app['queue'],
-                        $app['events'],
-                        $app[ExceptionHandler::class],
-                        $isDownForMaintenance
-                    );
-                case 5:
-                    return new WindowsWorker(
-                        $app['queue'],
-                        $app['events'],
-                        $app[ExceptionHandler::class],
-                        $isDownForMaintenance,
-                        $resetScope
-                    );
-                default:
-                    throw new InvalidParamsForWindowsWorker("Invalid params count ({$paramsCount}) for WindowsWorker");
             }
-        });
+
+            $app->forgetScopedInstances();
+
+            return Facade::clearResolvedInstances();
+        };
+    }
+
+    private function newWindowsWorkerInstance($app, $isDownForMaintenance, $resetScope): WindowsWorker
+    {
+        $reflectionClass = new ReflectionClass(WindowsWorker::class);
+        $paramsCount = count($reflectionClass->getConstructor()->getParameters());
+
+        switch ($paramsCount) {
+            case 3:
+                return new WindowsWorker(
+                    $app['queue'],
+                    $app['events'],
+                    $app[ExceptionHandler::class]
+                );
+            case 4:
+                return new WindowsWorker(
+                    $app['queue'],
+                    $app['events'],
+                    $app[ExceptionHandler::class],
+                    $isDownForMaintenance
+                );
+            case 5:
+                return new WindowsWorker(
+                    $app['queue'],
+                    $app['events'],
+                    $app[ExceptionHandler::class],
+                    $isDownForMaintenance,
+                    $resetScope
+                );
+            default:
+                throw new InvalidParamsForWindowsWorker("Invalid params count ({$paramsCount}) for WindowsWorker");
+        }
     }
 }
