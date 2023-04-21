@@ -11,7 +11,7 @@ class CreateConfigCommand extends Command
     private const BIN_DIR = __DIR__ . '/../../../bin/';
     private const EXE_FILE_NAME = 'LaravelQueueService.exe';
     private const EXE_FILE_PATH = self::BIN_DIR . self::EXE_FILE_NAME;
-    private const CONFIG_FILE_NAME = self::BIN_DIR . '.config';
+    private const CONFIG_FILE_NAME = self::EXE_FILE_NAME . '.config';
     private const CONFIG_FILE_PATH = self::BIN_DIR . self::CONFIG_FILE_NAME;
 
     protected $signature = "windows:service:queue:create
