@@ -6,5 +6,5 @@ use RuntimeException;
 
 class InvalidOptionException extends RuntimeException
 {
-
+    //
 }

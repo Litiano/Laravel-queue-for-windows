@@ -7,7 +7,7 @@ use Throwable;
 
 class EmptyServiceNameException extends RuntimeException
 {
-    public function __construct($message = 'Specify serviceName option', $code = 0, Throwable $previous = null)
+    public function __construct($message = 'Specify windowsServiceName option', $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

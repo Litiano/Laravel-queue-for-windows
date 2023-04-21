@@ -25,7 +25,6 @@ class CreateConfigCommand extends Command
 
     protected $description = 'Create new Windows queue service config.';
 
-
     public function handle(): void
     {
         $this->validateOptions();
@@ -63,6 +62,7 @@ class CreateConfigCommand extends Command
         $description = $this->option('description');
         $startType = $this->option('startType');
         $queueWorkArguments = $this->option('queueWorkArguments');
+
         $config = [
             '{{service_name}}' => $windowsServiceName,
             '{{queue_connection}}' => $queueConnection,
